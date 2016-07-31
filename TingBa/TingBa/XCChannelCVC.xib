@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="XCChannelCVC">
+            <rect key="frame" x="0.0" y="0.0" width="66" height="88"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="66" height="88"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有声小说" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wn1-14-NVU">
+                        <rect key="frame" x="0.0" y="61" width="66" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="TqL-z9-Hzu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yMj-RU-SXD">
+                        <rect key="frame" x="8" y="8" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="B5X-MC-QxO"/>
+                            <constraint firstAttribute="width" constant="50" id="qxb-Ed-XO0"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Wn1-14-NVU" secondAttribute="trailing" id="E7H-Co-Smi"/>
+                <constraint firstItem="Wn1-14-NVU" firstAttribute="top" secondItem="yMj-RU-SXD" secondAttribute="bottom" constant="3" id="UJt-D4-cNy"/>
+                <constraint firstItem="Wn1-14-NVU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Voz-6b-H69"/>
+                <constraint firstItem="yMj-RU-SXD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="c66-l2-x7b"/>
+                <constraint firstItem="yMj-RU-SXD" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="jGD-XG-t7n"/>
+            </constraints>
+            <size key="customSize" width="61" height="87"/>
+            <connections>
+                <outlet property="channelImg" destination="yMj-RU-SXD" id="2WK-Di-4zg"/>
+                <outlet property="name" destination="Wn1-14-NVU" id="ftB-UW-pvh"/>
+            </connections>
+            <point key="canvasLocation" x="242" y="256"/>
+        </collectionViewCell>
+    </objects>
+</document>

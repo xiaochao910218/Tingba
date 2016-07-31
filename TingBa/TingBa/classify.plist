@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>精选</string>
+		<key>url</key>
+		<string>http://api.iting360.com:8080/audible-book/service/audioBooks/getSdkFrontPage?imsi=460013184202204&amp;market=k-app360&amp;ver=2.5.1&amp;channelId=240&amp;appKey=audibleBook</string>
+		<key>tag</key>
+		<string>1</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>分类</string>
+		<key>url</key>
+		<string>http://api.iting360.com:8080/audible-book/service/audioBooks/getChannels?interf=v2&amp;imsi=460013184202204&amp;market=k-app360&amp;ver=2.5.1&amp;channelId=32&amp;appKey=audibleBook</string>
+		<key>tag</key>
+		<string>2</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>广播</string>
+		<key>url</key>
+		<string></string>
+		<key>tag</key>
+		<string>3</string>
+	</dict>
+</array>
+</plist>
