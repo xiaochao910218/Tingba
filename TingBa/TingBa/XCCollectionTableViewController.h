@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface XCCollectionTableViewController : UITableViewController
-
++(XCCollectionTableViewController *)canclePicture;
+-(void)canclePicture;
+-(void)hasPicture;
 @end

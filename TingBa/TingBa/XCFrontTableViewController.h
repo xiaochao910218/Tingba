@@ -13,4 +13,7 @@
 @property (nonatomic)        NSInteger page;
 @property (nonatomic,strong) NSString *channelId;
 @property (nonatomic,strong) NSString *fronttitle;
++(XCFrontTableViewController *)canclePicture;
+-(void)noPic;
+-(void)hasPic;
 @end

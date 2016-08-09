@@ -13,10 +13,10 @@
 #import "UIImageView+WebCache.h"
 #import "UIImage+ImageEffects.h"
 #import "XCPlayerViewController.h"
-
+#import "XMShareView.h"
 @interface XCListTableViewController ()
 @property(nonatomic,strong) AFHTTPSessionManager *manager;
-
+@property (nonatomic, strong) XMShareView *shareView;
 @property(nonatomic) NSInteger pageindex;
 @property(nonatomic)        BOOL px;
 @end
@@ -43,7 +43,7 @@ static NSString *isAsc;
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     [SVProgressHUD show];
     __weak XCListTableViewController *vc=self;
-    NSString *xcstr=[self.listUrl stringByReplacingOccurrencesOfString:@"pageIndex=1" withString:[NSString stringWithFormat:@"pageIndex=%ld",_pageindex]];
+    NSString *xcstr=[self.listUrl stringByReplacingOccurrencesOfString:@"pageIndex=1" withString:[NSString stringWithFormat:@"pageIndex=%ld",(long)_pageindex]];
     NSString *str=[xcstr stringByReplacingOccurrencesOfString:@"dir=ASC" withString:[NSString stringWithFormat:@"dir=%@",isAsc]];
     [self.manager GET:str parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -79,7 +79,7 @@ static NSString *isAsc;
     }
     [image sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"yushe"]];
     UIImageView *backimage=[[UIImageView alloc]initWithFrame:self.view.frame];
-    backimage.image=[image.image applyDarkEffect];
+    backimage.image=[image.image applyExtraLightEffect];
     self.tableView.backgroundView=backimage;
    
 }
@@ -134,6 +134,7 @@ static NSString *isAsc;
     UILabel *sectionLab=[UILabel new];
     UIView *backView=[UIView new];
     UILabel *listLab=[UILabel new];
+    UIButton *shareBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     icon.backgroundColor=[UIColor orangeColor];
     anchorLab.text=@"主 播:";
     anchorLab.font=[UIFont systemFontOfSize:12];
@@ -161,6 +162,11 @@ static NSString *isAsc;
         str=@"http://ec4.images-amazon.com/images/I/51jurMyudRL._SL500_AA300_.jpg";
     }
     [icon sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"yushe"]];
+    NSString *anchorStr=self.listanchor;
+    if ([[NSNull null] isEqual:anchorStr]) {
+        anchorStr=@"蜘蛛";
+    }
+    anchor.text=anchorStr;
     title.text=self.listTitle;
     listLab.text=[NSString stringWithFormat:@"(共 %@ 章)",self.listchapter];
     listLab.font=[UIFont systemFontOfSize:13];
@@ -172,7 +178,11 @@ static NSString *isAsc;
         playsall=[NSString stringWithFormat:@"%.0f",play];
     }
     count.text=playsall;
-    anchor.text=self.listanchor;
+    [shareBtn setImage:[UIImage imageNamed:@"fx.jpg"] forState:UIControlStateNormal];
+    [shareBtn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+    shareBtn.layer.cornerRadius=8;
+    shareBtn.layer.masksToBounds=YES;
+    [view addSubview:shareBtn];
     [view addSubview:icon];
     [view addSubview:title];
     [view addSubview:anchor];
@@ -206,6 +216,11 @@ static NSString *isAsc;
         make.left.equalTo(anchorLab.mas_right).with.offset(5);
         make.width.equalTo(@(120));
         make.height.equalTo(anchorLab);
+    }];
+    [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(anchor);
+        make.right.mas_equalTo(-12);
+        make.size.mas_equalTo(CGSizeMake(62, 30));
     }];
     [countLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(icon);
@@ -258,6 +273,30 @@ static NSString *isAsc;
     [self getRequest];
     
 }
+-(void)shareAction:(UIButton *)sender{
+    if(!self.shareView){
+        self.shareView = [[XMShareView alloc] initWithFrame:self.view.bounds];
+        self.shareView.alpha = 0.0;
+        self.shareView.shareTitle = NSLocalizedString(@"听吧分享", nil);
+        NSString *str=[NSString stringWithFormat:@"我在听<<%@>>",self.listTitle];
+        self.shareView.shareText = NSLocalizedString(str, nil);
+        self.shareView.shareUrl = @"http://blog.sina.com.cn/s/blog_151a38d710102w4sj.html";
+        
+        [self.view addSubview:self.shareView];
+        
+        [UIView animateWithDuration:1 animations:^{
+            self.shareView.alpha = 1.0;
+        }];
+        
+    }else{
+        [UIView animateWithDuration:1 animations:^{
+            self.shareView.alpha = 1.0;
+        }];
+        
+    }
+
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 135;
 }

@@ -49,7 +49,7 @@
 -(void)getRequst{
     NSString *url=[NSString stringWithFormat:@"%@&keyword=%@",BASEURL,_searchUrl];
     __weak XCSearchTableViewController *vc=self;
-    url=[url stringByReplacingOccurrencesOfString:@"pageIndex=1" withString:[NSString stringWithFormat:@"pageIndex=%ld",self.pageIndex]];
+    url=[url stringByReplacingOccurrencesOfString:@"pageIndex=1" withString:[NSString stringWithFormat:@"pageIndex=%ld",(long)self.pageIndex]];
     [self.manager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = (NSDictionary *)responseObject;

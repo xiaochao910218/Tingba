@@ -13,7 +13,6 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
         self.imageView = [[UIImageView alloc] init];
         [self addSubview:self.imageView];
     }

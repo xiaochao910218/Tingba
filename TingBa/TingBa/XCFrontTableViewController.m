@@ -8,7 +8,7 @@
 
 #import "XCFrontTableViewController.h"
 #import "XCCommon.h"
-static NSString  *KFileName=@"XCHistoryNovel.plist";
+static NSString  *HistoryName=@"XCHistoryNovel.plist";
 @interface XCFrontTableViewController ()
 @property(nonatomic,strong) AFHTTPSessionManager *manager;
 @property(nonatomic)NSInteger pageindex;
@@ -21,12 +21,47 @@ static NSString  *KFileName=@"XCHistoryNovel.plist";
 @property (nonatomic,strong) NSString *audioImg;
 @property (nonatomic,strong) NSString *audioUrl;
 @property(nonatomic,strong) NSMutableArray *listArr;
+@property(nonatomic,strong) NSMutableArray *historyArr;
 @property (nonatomic)BOOL isRefresh;
 @property(nonatomic,strong)NSString *filePath;
 
 @end
 
 @implementation XCFrontTableViewController
+static XCFrontTableViewController *datavc;
+static int isHe=0;
++(XCFrontTableViewController *)canclePicture
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        datavc=[[XCFrontTableViewController alloc]init];
+    });
+    return datavc;
+}
+-(void)noPic{
+    isHe=1;
+}
+
+-(void)hasPic{
+    isHe=0;
+}
+
+-(NSString *)filePath
+{
+    if (_filePath) {
+        return _filePath;
+    }
+    NSString *documentsPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    _filePath=[documentsPath stringByAppendingPathComponent:HistoryName];
+    return _filePath;
+}
+
+-(NSMutableArray *)historyArr{
+    if (!_historyArr) {
+        _historyArr=[NSMutableArray array];
+    }
+    return _historyArr;
+}
 -(NSMutableArray *)listArr{
     if (!_listArr) {
         _listArr=[NSMutableArray array];
@@ -84,13 +119,13 @@ static NSString  *KFileName=@"XCHistoryNovel.plist";
     }
     __weak XCFrontTableViewController *vc=self;
     if ([self.channelId integerValue] == 35) {
-        _strUrl=[_url stringByReplacingOccurrencesOfString:@"ver=2.5.1&pageIndex=1" withString:[NSString stringWithFormat:@"ver=2.5.1&labelId=%ld&pageIndex=%ld",self.lableId,_pageindex]];
+        _strUrl=[_url stringByReplacingOccurrencesOfString:@"ver=2.5.1&pageIndex=1" withString:[NSString stringWithFormat:@"ver=2.5.1&labelId=%ld&pageIndex=%ld",(long)self.lableId,(long)_pageindex]];
         if (self.lableId==140||self.lableId==141||self.lableId==9) {
             _strUrl=[_strUrl stringByReplacingOccurrencesOfString:@"bookSort=playCount" withString:@"bookSort=updatedTime"];
         }
     }
     else{
-        _strUrl=[_url stringByReplacingOccurrencesOfString:@"pageIndex=1" withString:[NSString stringWithFormat:@"pageIndex=%ld",_pageindex]];
+        _strUrl=[_url stringByReplacingOccurrencesOfString:@"pageIndex=1" withString:[NSString stringWithFormat:@"pageIndex=%ld",(long)_pageindex]];
     }
     
     [self.manager GET:_strUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -128,7 +163,7 @@ static NSString  *KFileName=@"XCHistoryNovel.plist";
                 XCRDataModel *front=[XCRDataModel rDataModelWithDictionary:chanDict];
                 [vc.frontArr addObject:front];
             }
-
+            
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [vc.tableView reloadData];
@@ -168,7 +203,9 @@ static NSString  *KFileName=@"XCHistoryNovel.plist";
         _titleScrollView.changeContentVC = ^(NSUInteger index){
             weakSelf.lableId=[weakSelf.chaId[index] integerValue];
             [weakSelf.frontArr removeAllObjects];
+            weakSelf.pageindex=1;
             [weakSelf getRequest];
+            
             
         };
     }
@@ -176,14 +213,12 @@ static NSString  *KFileName=@"XCHistoryNovel.plist";
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self.tableView reloadData];
+    //    [self.tableView reloadData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.tintColor=[UIColor redColor];
     self.navigationItem.title=self.fronttitle;
-    
-    
     _pageindex=1;
     _lableId=9;
     self.tableView.showsVerticalScrollIndicator=NO;
@@ -216,26 +251,32 @@ static NSString  *KFileName=@"XCHistoryNovel.plist";
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-        return self.frontArr.count;
-    }
+    return self.frontArr.count;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.page==1||self.page==2) {
-   
-    XCFrontModel *model=self.frontArr[indexPath.row];
-    XCFrontTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"morecell" forIndexPath:indexPath];
+        
+        XCFrontModel *model=self.frontArr[indexPath.row];
+        XCFrontTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"morecell" forIndexPath:indexPath];
+        if (isHe==1) {
+            model.coverImage=nil;
+        }
         cell.backgroundColor=[UIColor clearColor];
-    cell.model=model;
-    return cell;
+        cell.model=model;
+        return cell;
     }
     if (self.page==3) {
         
         XCRDataModel *model=self.frontArr[indexPath.row];
         XCRDataTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"morecell1" forIndexPath:indexPath];
-         cell.dataModel=model;
-       
-         cell.backgroundColor=[UIColor clearColor];
+        if (isHe==1) {
+            model.radioImage=nil;
+        }
+        cell.dataModel=model;
+        
+        cell.backgroundColor=[UIColor clearColor];
         return cell;
     }
     return nil;
@@ -246,13 +287,72 @@ static NSString  *KFileName=@"XCHistoryNovel.plist";
     if (self.page!=3) {
         XCListTableViewController *view=[self.storyboard instantiateViewControllerWithIdentifier:@"listtablevc"];
         XCFrontModel *model=self.frontArr[indexPath.row];
-
+        
         view.listUrl=[NSString stringWithFormat: @"http://api.iting360.com:8080/audible-book/service/audioBooksV2/getBookChaptersByPage?market=k-app360&dir=ASC&pageSize=20&bookId=%@&imsi=460013184202204&ver=2.5.1&pageIndex=1&appKey=audibleBook",model.coverId];
         view.listchapter=model.chapterCount;
         view.listTitle=model.name;
         view.listImage=model.coverImage;
         view.listplayCount=model.playCount;
         view.listanchor=model.anchor;
+        NSMutableDictionary *pars=[NSMutableDictionary dictionary];
+        NSString *name=model.name;
+        if (name) {
+            [pars setObject:name forKey:XCNovelName];
+        }
+        NSString *coverImage=model.coverImage;
+        if (coverImage) {
+            [pars setObject:coverImage forKey:XCNovelCoverImage];
+        }
+        NSString *author=model.author;
+        if (author) {
+            [pars setObject:author forKey:XCNovelAuthor];
+        }
+        NSString *overview=model.coverview;
+        if (overview) {
+            [pars setObject:overview forKey:XCNovelCoverview];
+        }
+        NSString *coverID=model.coverId;
+        if (coverID) {
+            [pars setObject:coverID forKey:XCNovelID];
+        }
+        NSString *createdTime=model.updatedTime;
+        if (createdTime) {
+            [pars setObject:createdTime forKey:XCNovelUpdatedTime];
+        }
+        NSString *chapterCount=model.chapterCount;
+        if (chapterCount) {
+            [pars setObject:chapterCount forKey:XCNovelChapterCount];
+        }
+        NSString *anchor=model.anchor;
+        if (anchor) {
+            [pars setObject:anchor forKey:XCNovelAnchor];
+        }
+        NSString *playCount=model.playCount;
+        if (playCount) {
+            [pars setObject:playCount forKey:XCNovelPlayCount];
+        }
+        NSArray *patharray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *path =  [patharray objectAtIndex:0];
+        NSString *filepath=[path stringByAppendingPathComponent:@"XCHistoryNovel.plist"];
+        self.historyArr =[NSMutableArray arrayWithContentsOfFile:filepath];
+        if(self.historyArr.count==0){
+            [self.historyArr addObject:pars];
+        }
+        BOOL isIn = false;
+        for (int i=0; i<self.historyArr.count; i++) {
+            NSDictionary *dic=self.historyArr[i];
+            
+            NSString *str=dic[@"name"];
+            if ([str isEqualToString:model.name]) {
+                isIn=YES;
+            }
+            
+        }
+        if (isIn==NO) {
+            [self.historyArr addObject:pars];
+        }
+        isIn=NO;
+        [self.historyArr writeToFile:self.filePath atomically:YES];
         [self.navigationController pushViewController:view animated:YES];
     }if (self.page==3) {
         XCRDataModel *model=self.frontArr[indexPath.row];
@@ -260,8 +360,6 @@ static NSString  *KFileName=@"XCHistoryNovel.plist";
         _audioImg=model.radioImage;
         [self getAudioList];
     }
-    
-    
 }
 -(void)gotoss{
     XCPlayerViewController *audio=[XCPlayerViewController audioPlayerController];
@@ -294,7 +392,7 @@ static NSString  *KFileName=@"XCHistoryNovel.plist";
         [alertCV addAction:action2];
         [self presentViewController:alertCV animated:YES completion:nil];
     }
-
+    
 }
 
 

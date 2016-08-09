@@ -66,11 +66,14 @@ static NSString  *KFileName=@"XCCollectionNovel.plist";
     for (int i=0; i<self.cancleCollectionArr.count; i++) {
         NSDictionary *dict=self.cancleCollectionArr[i];
         NSString *str=dict[@"name"];
-        
-        if ([str isEqualToString:_model.name]) {
+        if ([str isEqualToString:model.name]) {
             [_collectionBtn setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
             [_collectionBtn setTitle:@"已收藏" forState:UIControlStateNormal];
             _isCollection=YES;
+        }else{
+            [_collectionBtn setImage:[UIImage imageNamed:@"iconpng"] forState:UIControlStateNormal];
+            [_collectionBtn setTitle:@"收藏" forState:UIControlStateNormal];
+            _isCollection=NO;
         }
     }
 
@@ -99,7 +102,7 @@ static NSString  *KFileName=@"XCCollectionNovel.plist";
         self.cancleCollectionArr =[NSMutableArray arrayWithContentsOfFile:filepath];
         for (int i=0; i<self.cancleCollectionArr.count; i++) {
             NSDictionary *dict=self.cancleCollectionArr[i];
-            if ([dict[@"author"] isEqualToString:_model.author]) {
+            if ([dict[@"name"] isEqualToString:_model.name]) {
                 [self.cancleCollectionArr removeObject:dict];
             }
         }
@@ -140,6 +143,19 @@ static NSString  *KFileName=@"XCCollectionNovel.plist";
     if (createdTime) {
         [pars setObject:createdTime forKey:XCNovelUpdatedTime];
     }
+    NSString *chapterCount=_model.chapterCount;
+    if (chapterCount) {
+        [pars setObject:chapterCount forKey:XCNovelChapterCount];
+    }
+    NSString *anchor=_model.anchor;
+    if (anchor) {
+        [pars setObject:anchor forKey:XCNovelAnchor];
+    }
+    NSString *playCount=_model.playCount;
+    if (playCount) {
+        [pars setObject:playCount forKey:XCNovelPlayCount];
+    }
+
     NSArray *patharray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path =  [patharray objectAtIndex:0];
     NSString *filepath=[path stringByAppendingPathComponent:@"XCCollectionNovel.plist"];

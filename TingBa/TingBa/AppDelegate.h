@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WXApi.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WeiboSDK.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

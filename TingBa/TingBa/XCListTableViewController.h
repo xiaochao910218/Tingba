@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface XCListTableViewController : UITableViewController
+#import "WXApi.h"
+@interface XCListTableViewController : UITableViewController<WXApiDelegate>
 @property (nonatomic,strong) NSString *listUrl;
-@property (nonatomic) NSInteger listTag;
+//@property (nonatomic) NSInteger listTag;
 @property (nonatomic,strong) NSString *listImage;
 @property (nonatomic,strong) NSString *listTitle;
 @property (nonatomic,strong) NSString *listchapter;

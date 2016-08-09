@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString *coverview;
 @property (nonatomic, strong) NSString *chapterCount;
 @property (nonatomic, strong) NSString *playCount;
-@property (nonatomic)  BOOL iscancle;
+
 +(instancetype)frontModelWithDictionary:(NSDictionary *)dict;
 -(instancetype)initWithDictionary:(NSDictionary *)dict;
 @end

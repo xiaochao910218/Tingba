@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *coverImage;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLable;
-@property (weak, nonatomic) IBOutlet UIButton *collectionBtn;
+
 @property (weak, nonatomic) IBOutlet UILabel *currentLable;
 @property (nonatomic)                BOOL    isCollection;
 @end
@@ -31,10 +31,7 @@
     _currentLable.text=dataModel.radioCurrentBroadcast;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    _collectionBtn.hidden=YES;
-}
+
 
 
 

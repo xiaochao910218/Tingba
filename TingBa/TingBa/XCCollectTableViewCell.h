@@ -10,4 +10,5 @@
 @class XCFrontModel;
 @interface XCCollectTableViewCell : UITableViewCell
 @property (nonatomic,strong) XCFrontModel *model;
+@property (weak, nonatomic) IBOutlet UIButton *collectionBtn;
 @end

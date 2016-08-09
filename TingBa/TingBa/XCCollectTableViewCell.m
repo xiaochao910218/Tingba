@@ -15,7 +15,7 @@ static NSString  *KFileName=@"XCCollectionNovel.plist";
 
 @property (weak, nonatomic) IBOutlet UIImageView *coverImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLable;
-@property (weak, nonatomic) IBOutlet UIButton *collectionBtn;
+
 @property (weak, nonatomic) IBOutlet UILabel *authorLable;
 @property (weak, nonatomic) IBOutlet UILabel *createTimeLable;
 @property (nonatomic)                BOOL    isCollection;
@@ -63,22 +63,4 @@ static NSString  *KFileName=@"XCCollectionNovel.plist";
 
     // Configure the view for the selected state
 }
-- (IBAction)collectionAction:(UIButton *)sender {
-    _model.iscancle=YES;
-   
-    NSArray *patharray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path =  [patharray objectAtIndex:0];
-    NSString *filepath=[path stringByAppendingPathComponent:@"XCCollectionNovel.plist"];
-    self.collectionArr=[NSMutableArray arrayWithContentsOfFile:filepath];
-    for (int i=0; i<self.collectionArr.count; i++) {
-        NSDictionary *dict=self.collectionArr[i];
-        if ([dict[@"author"] isEqualToString:_model.author]) {
-            [self.collectionArr removeObject:dict];
-        }
-    }
-    
-    [self.collectionArr writeToFile:self.filePath atomically:YES];
-
-}
-
 @end

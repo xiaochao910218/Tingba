@@ -13,6 +13,7 @@
 #import "XCDataBaseTool.h"
 #import "XCPlayerViewController.h"
 #import "CBAutoScrollLabel.h"
+#import "XCRotatingView.h"
 @interface XCDataViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) NSString *urlStr;
@@ -25,12 +26,15 @@
 
 
 //播放
+@property (weak, nonatomic) IBOutlet UIView *playerView;
+@property (weak, nonatomic) IBOutlet UIImageView *underImageView;
+
 @property (strong, nonatomic)  UIImageView *iconImg;
 @property (strong, nonatomic)  UILabel *titleLab;
 @property (strong, nonatomic)  UIButton *playerBtn;
 
-@property (weak, nonatomic) IBOutlet UIImageView *xcicon;
 
+@property (strong, nonatomic) XCRotatingView *rotatingView;
 
 @property (weak, nonatomic) IBOutlet CBAutoScrollLabel *titleVieew;
 
@@ -41,15 +45,23 @@
 @end
 
 @implementation XCDataViewController
-static XCDataViewController *player;
-
-+(XCDataViewController *)senderPlayer
+static XCDataViewController *datavc;
+static int isHe=0;
++(XCDataViewController *)canclePicture
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        player=[[XCDataViewController alloc]init];
+        datavc=[[XCDataViewController alloc]init];
     });
-    return player;
+    return datavc;
+}
+-(void)changeIT{
+    isHe=1;
+//    [self.collectionView reloadData];
+}
+-(void)backIT{
+    isHe=0;
+//    [self.collectionView reloadData];
 }
 static NSInteger tag=1;
 static NSString *itemIdentifier = @"item";
@@ -162,20 +174,15 @@ static NSString *headerIdentifier = @"header";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     XCPlayerViewController *vc=[XCPlayerViewController audioPlayerController];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    animation.toValue = [NSNumber numberWithFloat:2 * M_PI];//动画移动的目标
-    animation.duration = 8;//时间
-    animation.repeatCount = MAXFLOAT;//循环次数
-    animation.cumulative = YES;//动画结束复位;
-    [self.xcicon sd_setImageWithURL:[NSURL URLWithString:vc.playingModel.listCoverImage] placeholderImage:[UIImage imageNamed:@"yushe"]];
-    self.xcicon.layer.cornerRadius=20;
-    self.xcicon.layer.masksToBounds=YES;
+       [self creatViews];
     if (vc.isPlaying==NO) {
-        [self.xcicon.layer removeAllAnimations];
+        [self.rotatingView pauseLayer];
         [self.xcbtn setImage:[UIImage imageNamed:@"MusicPlayer_暂停"] forState:UIControlStateNormal];
         self.titleVieew.text=@"无播放";
+        self.titleVieew.fadeLength=12.f;
+        self.titleVieew.font=[UIFont systemFontOfSize:12];
     }else if(vc.isPlaying==YES){
-        [self.xcicon.layer addAnimation:animation forKey:@"transform.rotation.z"];
+        [self.rotatingView resumeLayer];
         self.titleVieew.text=vc.playingModel.listTitle;
         self.titleVieew.labelSpacing=30;
         self.titleVieew.pauseInterval=1.8f;
@@ -185,8 +192,26 @@ static NSString *headerIdentifier = @"header";
         [self.xcbtn setImage:[UIImage imageNamed:@"MusicPlayer_播放"] forState:UIControlStateNormal];
     }
     
-    
 }
+- (void)creatViews{
+    XCPlayerViewController *vc=[XCPlayerViewController audioPlayerController];
+    self.rotatingView = [[XCRotatingView alloc] init];
+    self.rotatingView.imageView.image = [UIImage imageNamed:@"yushe"];
+    [self.playerView addSubview:self.rotatingView];
+    self.rotatingView.frame = CGRectMake(10, 0, 44, 44);
+    self.rotatingView.center = CGPointMake(34,22);
+    [self.rotatingView setRotatingViewLayoutWithFrame:self.rotatingView.frame];
+    
+    [self.rotatingView addAnimation];
+    self.underImageView.image = [UIImage imageNamed:@"音乐_播放器_默认模糊背景"];
+    [self.rotatingView.imageView sd_setImageWithURL:[NSURL URLWithString:vc.playingModel.listCoverImage] placeholderImage:[UIImage imageNamed:@"yushe"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            self.underImageView.image = [image applyDarkEffect];
+        }
+    }];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent=NO;
@@ -238,22 +263,26 @@ static NSString *headerIdentifier = @"header";
     _collectionView.delegate = self;
     //注册UICollectionViewCell
     if (tag == 1) {
+        CGFloat width=(WIDTH-276)/4;
         [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([XCFrontCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:itemIdentifier];
-        _flowLayout.minimumInteritemSpacing = 0.0;
+        _flowLayout.minimumInteritemSpacing = width;
         _flowLayout.headerReferenceSize = CGSizeMake(40, 40);
-        _flowLayout.sectionInset = UIEdgeInsetsMake(0,20, 0,20);
+        _flowLayout.sectionInset = UIEdgeInsetsMake(0,width, 0,width);
     }
     //注册SupplementaryView
     if (tag==2) {
+        CGFloat width=(WIDTH-264)/5;
         [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([XCChannelCVC class]) bundle:nil] forCellWithReuseIdentifier:itemIdentifier];
-        _flowLayout.sectionInset = UIEdgeInsetsMake(0,20, 0,20);
+        _flowLayout.minimumInteritemSpacing = width;
+        _flowLayout.sectionInset = UIEdgeInsetsMake(0,width, 0,width);
         _flowLayout.headerReferenceSize = CGSizeMake(0, 0);
     }
     if (tag==3) {
+        CGFloat width=(WIDTH-200)/5;
         [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([XCRadioCVCStyle1 class]) bundle:nil] forCellWithReuseIdentifier:itemIdentifier];
-        _flowLayout.minimumInteritemSpacing = 25.0;
+        _flowLayout.minimumInteritemSpacing = width;
         [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([XCRadioStyle2 class]) bundle:nil] forCellWithReuseIdentifier:itemIdentifier1];
-        _flowLayout.sectionInset = UIEdgeInsetsMake(0,22, 0,22);
+        _flowLayout.sectionInset = UIEdgeInsetsMake(0,width, 0,width);
     }
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
@@ -360,6 +389,9 @@ static NSString *headerIdentifier = @"header";
         XCFrontCollectionViewCell *item = [collectionView dequeueReusableCellWithReuseIdentifier:itemIdentifier forIndexPath:indexPath];
         //获取cell对应的模型
         XCFrontModel *model = self.frontArr[indexPath.item];
+        if (isHe==1) {
+            model.coverImage=nil;
+        }
         item.frontModel=model;
         return item;
     }else if(tag==2){
@@ -392,7 +424,7 @@ static NSString *headerIdentifier = @"header";
     [self.xcbtn setImage:nil forState:UIControlStateNormal];
     if (tag==1) {
         XCFrontModel *model=self.frontArr[indexPath.row];
-        listVC.listTag=1;
+//        listVC.listTag=1;
         listVC.listImage=model.coverImage;
         listVC.listTitle=model.name;
         listVC.listchapter=model.chapterCount;
@@ -483,7 +515,9 @@ static NSString *headerIdentifier = @"header";
         if (indexPath.section==0) {
             return CGSizeMake(50, 80);
         }else if(indexPath.section==1){
-            return CGSizeMake(145, 34);
+            int width=(WIDTH-200)/5;
+            NSInteger width1=100+width;
+            return CGSizeMake(width1, 34);
         }
     }
     return CGSizeZero;
@@ -508,11 +542,11 @@ static NSString *headerIdentifier = @"header";
         [self presentViewController:alertCV animated:YES completion:nil];
     }else{
         if (vc.isPlaying==NO) {
-             [self.xcicon.layer removeAllAnimations];
+            [self.rotatingView pauseLayer];
             
             [self.xcbtn setImage:[UIImage imageNamed:@"MusicPlayer_暂停"] forState:UIControlStateNormal];
         }else{
-            [self.xcicon.layer addAnimation:animation forKey:@"transform.rotation.z"];
+            [self.rotatingView resumeLayer];
             [self.xcbtn setImage:[UIImage imageNamed:@"MusicPlayer_播放"] forState:UIControlStateNormal];
         }
     }
