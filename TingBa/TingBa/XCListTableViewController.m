@@ -116,6 +116,7 @@ static NSString *isAsc;
     [audio initWithArray:self.listArr index:indexPath.row];
     audio.menuUrl=self.listUrl;
     audio.menuImg=self.listImage;
+    audio.overview=self.listDes;
     [self.navigationController pushViewController:audio animated:YES];
 }
 
@@ -321,7 +322,8 @@ static NSString *isAsc;
     else{
         UIAlertController *alertCV=[UIAlertController alertControllerWithTitle:@"提示" message:@"没有正在播放的书籍或电台" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-             [self presentViewController:vc animated:YES completion:nil];
+//             [self presentViewController:vc animated:YES completion:nil];
+            [self.navigationController pushViewController:vc animated:YES];
         }];
         UIAlertAction *action2=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {}];
         [alertCV addAction:action1];

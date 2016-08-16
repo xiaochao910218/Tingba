@@ -97,7 +97,6 @@ static NSString *headerIdentifier = @"header";
         [_manager.reachabilityManager startMonitoring];
     }
     return _manager;
-    
 }
 
 -(void)getRequest{
@@ -175,20 +174,18 @@ static NSString *headerIdentifier = @"header";
     [super viewWillAppear:animated];
     XCPlayerViewController *vc=[XCPlayerViewController audioPlayerController];
        [self creatViews];
+    self.titleVieew.text=vc.playingModel.listTitle;
+    self.titleVieew.labelSpacing=30;
+    self.titleVieew.pauseInterval=1.8f;
+    self.titleVieew.scrollSpeed=30;
+    self.titleVieew.fadeLength=12.f;
+    self.titleVieew.font=[UIFont systemFontOfSize:12];
     if (vc.isPlaying==NO) {
         [self.rotatingView pauseLayer];
         [self.xcbtn setImage:[UIImage imageNamed:@"MusicPlayer_暂停"] forState:UIControlStateNormal];
-        self.titleVieew.text=@"无播放";
-        self.titleVieew.fadeLength=12.f;
-        self.titleVieew.font=[UIFont systemFontOfSize:12];
     }else if(vc.isPlaying==YES){
         [self.rotatingView resumeLayer];
-        self.titleVieew.text=vc.playingModel.listTitle;
-        self.titleVieew.labelSpacing=30;
-        self.titleVieew.pauseInterval=1.8f;
-        self.titleVieew.scrollSpeed=30;
-        self.titleVieew.fadeLength=12.f;
-        self.titleVieew.font=[UIFont systemFontOfSize:12];
+        
         [self.xcbtn setImage:[UIImage imageNamed:@"MusicPlayer_播放"] forState:UIControlStateNormal];
     }
     
@@ -430,6 +427,7 @@ static NSString *headerIdentifier = @"header";
         listVC.listchapter=model.chapterCount;
         listVC.listanchor=model.anchor;
         listVC.listplayCount=model.playCount;
+        listVC.listDes=model.coverview;
         listVC.listUrl=[NSString stringWithFormat: @"http://api.iting360.com:8080/audible-book/service/audioBooksV2/getBookChaptersByPage?market=k-app360&dir=ASC&pageSize=20&bookId=%@&imsi=460013184202204&ver=2.5.1&pageIndex=1&appKey=audibleBook",model.coverId];
         
         [self.navigationController pushViewController:listVC animated:YES];

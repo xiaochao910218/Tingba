@@ -24,7 +24,7 @@
     self.contentViewShadowEnabled = YES;
     self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
     self.leftMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftMenuViewController"];
-    self.rightMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"selfView"];
+    self.rightMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"selfnav"];
     self.delegate = self;
 }
 

@@ -14,7 +14,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WeiboSDK.h"
-@interface AppDelegate ()<WeiboSDKDelegate, QQApiInterfaceDelegate>
+@interface AppDelegate ()<WeiboSDKDelegate, QQApiInterfaceDelegate,WeiboSDKDelegate>
 @end
 
 @implementation AppDelegate
@@ -80,25 +80,32 @@
  */
 - (void)didReceiveWeiboResponse:(WBBaseResponse *)response
 {
-    NSString *message;
-    switch (response.statusCode) {
-        case WeiboSDKResponseStatusCodeSuccess:
-            message = @"分享成功";
-            break;
-        case WeiboSDKResponseStatusCodeUserCancel:
-            message = @"取消分享";
-            break;
-        case WeiboSDKResponseStatusCodeSentFail:
-            message = @"分享失败";
-            break;
-        default:
-            message = @"分享失败";
-            break;
+//    NSString *message;
+//    switch (response.statusCode) {
+//        case WeiboSDKResponseStatusCodeSuccess:
+//            message = @"分享成功";
+//            break;
+//        case WeiboSDKResponseStatusCodeUserCancel:
+//            message = @"取消分享";
+//            break;
+//        case WeiboSDKResponseStatusCodeSentFail:
+//            message = @"分享失败";
+//            break;
+//        default:
+//            message = @"分享失败";
+//            break;
+//    }
+//    UIAlertController *alertCV=[UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *action=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {}];[alertCV addAction:action];
+//    XCListTableViewController *vc = (XCListTableViewController *)self.window.rootViewController;
+//    [vc presentViewController:alertCV animated:YES completion:nil];
+    if ([response isKindOfClass:WBAuthorizeResponse.class])  //微博登录的回调
+    {
+        if ([_weiboDelegate respondsToSelector:@selector(weiboLoginByResponse:)]) {
+            [_weiboDelegate weiboLoginByResponse:response];
+        }
     }
-    UIAlertController *alertCV=[UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {}];[alertCV addAction:action];
-    XCListTableViewController *vc = (XCListTableViewController *)self.window.rootViewController;
-    [vc presentViewController:alertCV animated:YES completion:nil];
+
 }
 
 /**
@@ -116,6 +123,11 @@
  *
  *  @param resp 响应体，根据响应结果作对应处理
  */
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+    
+    return [WeiboSDK handleOpenURL:url delegate:self];
+}
+
 - (void)onResp:(QQBaseResp *)resp
 {
     NSString *message;

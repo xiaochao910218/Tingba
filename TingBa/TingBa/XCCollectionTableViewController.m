@@ -87,6 +87,7 @@ static int isHe=0;
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.671 green:0.749 blue:0.176 alpha:0.6]];
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -152,11 +153,8 @@ static int isHe=0;
     [self.colArr removeObjectAtIndex:indexPath.row];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     [self.tableView reloadData];
-    
-
-
-    
 }
+
 
 
 @end

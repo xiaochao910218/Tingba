@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, AudioPlayerMode) {
  */
 @property (strong, nonatomic) MBProgressHUD *HUD;
 @property (nonatomic) BOOL isPlaying;
+@property (strong, nonatomic)NSString *overview;
 @property (strong, nonatomic)NSString *menuUrl;
 @property (strong, nonatomic)NSString *menuImg;
 @property (strong, nonatomic)XCListModel *playingModel;

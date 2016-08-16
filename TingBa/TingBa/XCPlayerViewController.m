@@ -13,6 +13,7 @@
 #import "XCListTableViewController.h"
 #import "XCDataViewController.h"
 #import "XCOneTableViewController.h"
+#import "XCCommon.h"
 
 @interface XCPlayerViewController ()
 {
@@ -30,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *paceSlider;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 
-@property (weak, nonatomic) IBOutlet CBAutoScrollLabel *titleView;
+@property (strong, nonatomic) CBAutoScrollLabel *titleView;
 
 @property (weak, nonatomic) IBOutlet UILabel *playingTime; // 当前播放时间Label
 @property (weak, nonatomic) IBOutlet UILabel *maxTime; // 总时间Label
@@ -38,6 +39,13 @@
 @end
 static XCPlayerViewController *audioVC;
 @implementation XCPlayerViewController
+
+-(CBAutoScrollLabel *)titleView{
+    if (!_titleView) {
+        _titleView=[[CBAutoScrollLabel alloc]initWithFrame:CGRectMake(0, 0, WIDTH-64, 64)];
+    }
+    return _titleView;
+}
 
 +(XCPlayerViewController *)audioPlayerController{
     static dispatch_once_t onceToken;
@@ -110,6 +118,7 @@ static XCPlayerViewController *audioVC;
 }
 
 - (void)updateUIDataWith:(XCListModel *)model{
+//    self.titleView =[CBAutoScrollLabel alloc]initWithFrame:CGRectMake(0, 0,WIDTH, 60);
     self.titleView.text = model.listTitle;
     self.titleView.labelSpacing=30;
     self.titleView.pauseInterval=1.7;
@@ -118,6 +127,8 @@ static XCPlayerViewController *audioVC;
     self.titleView.fadeLength=12.f;
     self.titleView.scrollDirection=CBAutoScrollDirectionLeft;
     [self.titleView observeApplicationNotifications];
+    self.navigationItem.titleView=self.titleView;
+    self.navigationItem.title=@"播放器";
     [self setImageWith:model];
 }
 #pragma mark - KVO - status
@@ -281,7 +292,9 @@ static XCPlayerViewController *audioVC;
     XCOneTableViewController *men=[sb instantiateViewControllerWithIdentifier:@"onetabvc"];
     men.url=self.menuUrl;
     men.img=self.menuImg;
-    [self presentViewController:men animated:YES completion:nil];
+    men.des=self.overview;
+//    [self presentViewController:men animated:YES completion:nil];
+    [self.navigationController pushViewController:men animated:YES];
 }
 
 

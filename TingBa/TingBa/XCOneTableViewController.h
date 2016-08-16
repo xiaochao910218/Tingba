@@ -11,4 +11,5 @@
 @interface XCOneTableViewController : UITableViewController
 @property (nonatomic,strong) NSString *url;
 @property (nonatomic,strong) NSString *img;
+@property (nonatomic,strong) NSString *des;
 @end

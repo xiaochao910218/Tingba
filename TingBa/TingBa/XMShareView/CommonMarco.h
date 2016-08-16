@@ -14,9 +14,9 @@
 
 #define APP_KEY_QQ                @"222222"
 
-#define APP_KEY_WEIBO             @"2045436852"
+#define APP_KEY_WEIBO             @"4032180399"
 
-#define APP_KEY_WEIBO_RedirectURL @"http://www.sina.com"
+#define APP_KEY_WEIBO_RedirectURL @"https://api.weibo.com/oauth2/default.html"
 
 ///  分享图片
 #define SHARE_IMG [UIImage imageNamed:@"logo.png"]

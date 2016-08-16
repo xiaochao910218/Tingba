@@ -10,7 +10,6 @@
 		3D8B3CA7478E4D10D03AAD56 /* libPods-TingBaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57889609B5842DE42C75E5D /* libPods-TingBaTests.a */; };
 		4F0831EB1D4348FD00F00AC6 /* icon_ios_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F0831EA1D4348FD00F00AC6 /* icon_ios_search.png */; };
 		4F0831ED1D434DC800F00AC6 /* footer.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F0831EC1D434DC800F00AC6 /* footer.png */; };
-		4F0831F11D435A9500F00AC6 /* XCSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0831F01D435A9500F00AC6 /* XCSearchTableViewController.m */; };
 		4F12EDA11D425274006251DA /* XCDataBaseTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F12EDA01D425274006251DA /* XCDataBaseTool.m */; };
 		4F20E7D91D5582FD00156187 /* fx.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4F20E7D81D5582FD00156187 /* fx.jpg */; };
 		4F20E86B1D558CAE00156187 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F20E86A1D558CAE00156187 /* CoreTelephony.framework */; };
@@ -68,8 +67,13 @@
 		4F90A0B81D3A477F00D133C5 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A0AA1D3A477F00D133C5 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		4F90A0B91D3A477F00D133C5 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A0AC1D3A477F00D133C5 /* View+MASAdditions.m */; };
 		4F90A0BA1D3A477F00D133C5 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A0AF1D3A477F00D133C5 /* ViewController+MASAdditions.m */; };
+		4F98C1501D5EBA8800FDC157 /* XCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F98C14F1D5EBA8800FDC157 /* XCLoginViewController.m */; };
 		4F9CB18C1D55AE9200683EAD /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F20E8AF1D558D9300156187 /* libstdc++.tbd */; };
 		4F9CB18D1D55AEA100683EAD /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F20E8B11D558DA000156187 /* libiconv.tbd */; };
+		4FA89DDC1D62A24800B0F315 /* XCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA89DDB1D62A24800B0F315 /* XCSearchViewController.m */; };
+		4FA89DE11D62A2D100B0F315 /* XLSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA89DE01D62A2D100B0F315 /* XLSphereView.m */; };
+		4FA89DE41D62A47900B0F315 /* XCSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA89DE31D62A47900B0F315 /* XCSearchTableViewController.m */; };
+		4FA89DE61D62A62300B0F315 /* biaoqian.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FA89DE51D62A62300B0F315 /* biaoqian.plist */; };
 		4FC40FE51D405C5000EAB46D /* screen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4FC40FE41D405C5000EAB46D /* screen.jpg */; };
 		4FC40FE71D405F2300EAB46D /* screen1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4FC40FE61D405F2300EAB46D /* screen1.jpg */; };
 		4FC40FEE1D4061BD00EAB46D /* UIImage+MostColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC40FED1D4061BD00EAB46D /* UIImage+MostColor.m */; };
@@ -176,8 +180,6 @@
 		26089B5CD8A713502089A250 /* Pods-TingBaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TingBaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TingBaTests/Pods-TingBaTests.release.xcconfig"; sourceTree = "<group>"; };
 		4F0831EA1D4348FD00F00AC6 /* icon_ios_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_ios_search.png; sourceTree = "<group>"; };
 		4F0831EC1D434DC800F00AC6 /* footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footer.png; sourceTree = "<group>"; };
-		4F0831EF1D435A9500F00AC6 /* XCSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCSearchTableViewController.h; sourceTree = "<group>"; };
-		4F0831F01D435A9500F00AC6 /* XCSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCSearchTableViewController.m; sourceTree = "<group>"; };
 		4F12ED9E1D425274006251DA /* DataBaseFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseFile.h; sourceTree = "<group>"; };
 		4F12ED9F1D425274006251DA /* XCDataBaseTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCDataBaseTool.h; sourceTree = "<group>"; };
 		4F12EDA01D425274006251DA /* XCDataBaseTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCDataBaseTool.m; sourceTree = "<group>"; };
@@ -290,6 +292,17 @@
 		4F90A0AD1D3A477F00D133C5 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		4F90A0AE1D3A477F00D133C5 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		4F90A0AF1D3A477F00D133C5 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		4F98C14E1D5EBA8800FDC157 /* XCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCLoginViewController.h; sourceTree = "<group>"; };
+		4F98C14F1D5EBA8800FDC157 /* XCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCLoginViewController.m; sourceTree = "<group>"; };
+		4FA89DDA1D62A24800B0F315 /* XCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCSearchViewController.h; sourceTree = "<group>"; };
+		4FA89DDB1D62A24800B0F315 /* XCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCSearchViewController.m; sourceTree = "<group>"; };
+		4FA89DDD1D62A2D100B0F315 /* XLMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLMatrix.h; sourceTree = "<group>"; };
+		4FA89DDE1D62A2D100B0F315 /* XLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLPoint.h; sourceTree = "<group>"; };
+		4FA89DDF1D62A2D100B0F315 /* XLSphereView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSphereView.h; sourceTree = "<group>"; };
+		4FA89DE01D62A2D100B0F315 /* XLSphereView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSphereView.m; sourceTree = "<group>"; };
+		4FA89DE21D62A47900B0F315 /* XCSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCSearchTableViewController.h; sourceTree = "<group>"; };
+		4FA89DE31D62A47900B0F315 /* XCSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCSearchTableViewController.m; sourceTree = "<group>"; };
+		4FA89DE51D62A62300B0F315 /* biaoqian.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = biaoqian.plist; sourceTree = "<group>"; };
 		4FC40FE41D405C5000EAB46D /* screen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = screen.jpg; sourceTree = "<group>"; };
 		4FC40FE61D405F2300EAB46D /* screen1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = screen1.jpg; path = ../screen1.jpg; sourceTree = "<group>"; };
 		4FC40FEC1D4061BD00EAB46D /* UIImage+MostColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MostColor.h"; sourceTree = "<group>"; };
@@ -460,8 +473,10 @@
 		4F0831EE1D435A6A00F00AC6 /* 搜索 */ = {
 			isa = PBXGroup;
 			children = (
-				4F0831EF1D435A9500F00AC6 /* XCSearchTableViewController.h */,
-				4F0831F01D435A9500F00AC6 /* XCSearchTableViewController.m */,
+				4FA89DDA1D62A24800B0F315 /* XCSearchViewController.h */,
+				4FA89DDB1D62A24800B0F315 /* XCSearchViewController.m */,
+				4FA89DE21D62A47900B0F315 /* XCSearchTableViewController.h */,
+				4FA89DE31D62A47900B0F315 /* XCSearchTableViewController.m */,
 			);
 			name = "搜索";
 			sourceTree = "<group>";
@@ -650,6 +665,7 @@
 		4F3945A41D39D2CC007F842F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4F98C14D1D5EBA7400FDC157 /* 登录 */,
 				4F7F9C431D4DF2BD00AB49B3 /* 足迹 */,
 				4F0831EE1D435A6A00F00AC6 /* 搜索 */,
 				4FC410021D40CF6600EAB46D /* 播放器 */,
@@ -786,9 +802,23 @@
 			path = Masonry;
 			sourceTree = "<group>";
 		};
+		4F98C14D1D5EBA7400FDC157 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				4F98C14E1D5EBA8800FDC157 /* XCLoginViewController.h */,
+				4F98C14F1D5EBA8800FDC157 /* XCLoginViewController.m */,
+			);
+			name = "登录";
+			sourceTree = "<group>";
+		};
 		4FC40FE81D405FB400EAB46D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				4FA89DE51D62A62300B0F315 /* biaoqian.plist */,
+				4FA89DDD1D62A2D100B0F315 /* XLMatrix.h */,
+				4FA89DDE1D62A2D100B0F315 /* XLPoint.h */,
+				4FA89DDF1D62A2D100B0F315 /* XLSphereView.h */,
+				4FA89DE01D62A2D100B0F315 /* XLSphereView.m */,
 				4FC40FFC1D40CF5B00EAB46D /* NSString+time.h */,
 				4FC40FFD1D40CF5B00EAB46D /* NSString+time.m */,
 				4FC40FFE1D40CF5B00EAB46D /* UIImage+ImageEffects.h */,
@@ -1218,6 +1248,7 @@
 				4F20E89E1D558D5500156187 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				4FE713F31D3E2F8700BF72DC /* XCChannelCVC.xib in Resources */,
 				4FC4101F1D40D03A00EAB46D /* MusicPlayer_下载@2x.png in Resources */,
+				4FA89DE61D62A62300B0F315 /* biaoqian.plist in Resources */,
 				4F7F9C1C1D4D8B1400AB49B3 /* back@2x.png in Resources */,
 				4FE713ED1D3E1A8800BF72DC /* timer.png in Resources */,
 				4F39457C1D39D2C6007F842F /* Main.storyboard in Resources */,
@@ -1381,12 +1412,12 @@
 				4F7E78881D45BCE80031EB98 /* XCSearchModel.m in Sources */,
 				4F90A0B21D3A477F00D133C5 /* MASConstraint.m in Sources */,
 				4FE713F21D3E2F8700BF72DC /* XCChannelCVC.m in Sources */,
-				4F0831F11D435A9500F00AC6 /* XCSearchTableViewController.m in Sources */,
 				4F20E8A71D558D5500156187 /* XMShareUtil.m in Sources */,
 				4F47B14A1D3CF5780081DEA3 /* XCMenuModel.m in Sources */,
 				4FC40FEE1D4061BD00EAB46D /* UIImage+MostColor.m in Sources */,
 				4FE714241D3E507100BF72DC /* XCRadioStyle2.m in Sources */,
 				4FC40FF71D407E3700EAB46D /* XCListTableViewCell.m in Sources */,
+				4F98C1501D5EBA8800FDC157 /* XCLoginViewController.m in Sources */,
 				4FE9224B1D3F4AD900C28D42 /* XCRDataTableViewCell.m in Sources */,
 				4F12EDA11D425274006251DA /* XCDataBaseTool.m in Sources */,
 				4FC40FFB1D40A8E200EAB46D /* XCListModel.m in Sources */,
@@ -1398,6 +1429,7 @@
 				4F90A0B41D3A477F00D133C5 /* MASLayoutConstraint.m in Sources */,
 				4FE922841D3F9B2200C28D42 /* XCTitlesModel.m in Sources */,
 				4FE713E11D3DFCCE00BF72DC /* XCFrontTableViewController.m in Sources */,
+				4FA89DE41D62A47900B0F315 /* XCSearchTableViewController.m in Sources */,
 				4F90A0B71D3A477F00D133C5 /* NSArray+MASAdditions.m in Sources */,
 				4FC4102C1D40D10700EAB46D /* CBAutoScrollLabel.m in Sources */,
 				4FE9227D1D3F967D00C28D42 /* XCNovelTitle.m in Sources */,
@@ -1424,11 +1456,13 @@
 				4F90A0B11D3A477F00D133C5 /* MASCompositeConstraint.m in Sources */,
 				4FEBFD741D51864D00EB4FFF /* XCSelfTableViewController.m in Sources */,
 				4FE7141E1D3E4DDD00BF72DC /* XCRadioCVCStyle1.m in Sources */,
+				4FA89DE11D62A2D100B0F315 /* XLSphereView.m in Sources */,
 				4F90A0B81D3A477F00D133C5 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				4FC410011D40CF5B00EAB46D /* UIImage+ImageEffects.m in Sources */,
 				4FEBFD771D51C27400EB4FFF /* XCClearCacheTool.m in Sources */,
 				4FC4100D1D40CF8C00EAB46D /* XCPlayerViewController+methods.m in Sources */,
 				4FC410001D40CF5B00EAB46D /* NSString+time.m in Sources */,
+				4FA89DDC1D62A24800B0F315 /* XCSearchViewController.m in Sources */,
 				4FE922461D3F484600C28D42 /* XCRDataModel.m in Sources */,
 				4F47B1571D3D051C0081DEA3 /* XCFrontCollectionViewCell.m in Sources */,
 			);
@@ -1592,7 +1626,7 @@
 					"$(PROJECT_DIR)/TingBa/libWeiboSDK",
 					"$(PROJECT_DIR)/TingBa/Weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiaochao.TingBa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TingBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1622,7 +1656,7 @@
 					"$(PROJECT_DIR)/TingBa/libWeiboSDK",
 					"$(PROJECT_DIR)/TingBa/Weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiaochao.TingBa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TingBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

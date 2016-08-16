@@ -66,14 +66,16 @@
     self.tableView.rowHeight=48;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([XCListOneTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"listcell"];
+    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 120, 120)];
+    NSString *str=self.img;
+    if ([[NSNull null] isEqual:str]) {
+        str=@"http://ec4.images-amazon.com/images/I/51jurMyudRL._SL500_AA300_.jpg";
+    }
+    [image sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"yushe"]];
+    UIImageView *backimage=[[UIImageView alloc]initWithFrame:self.view.frame];
+    backimage.image=[image.image applyExtraLightEffect];
+    self.tableView.backgroundView=backimage;
    
-}
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -99,48 +101,51 @@
     model.listCoverImage=str;
     cell.backgroundColor=[UIColor clearColor];
     cell.listModel=model;
-    
     return cell;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 64;
-}
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 64)];
-    view.backgroundColor=[UIColor orangeColor];
-    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    UILabel *lab=[UILabel new];
-    lab.text=@"目录";
-    [btn setImage:[UIImage imageNamed:@"MusicPlayer_后退"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(xbtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    lab.font=[UIFont systemFontOfSize:15];
-    lab.textColor=[UIColor purpleColor];
-    [view addSubview:btn];
-    [view addSubview:lab];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(22);
-        make.left.mas_equalTo(18);
-        make.size.mas_equalTo(CGSizeMake(40, 40));
-    }];
-    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(view);
-        make.centerY.equalTo(btn.mas_centerY);
-        
-    }];
-    return view;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     XCPlayerViewController *audio=[XCPlayerViewController audioPlayerController];
     [audio initWithArray:self.listArr index:indexPath.row];
     audio.menuUrl=self.url;
     audio.menuImg=self.img;
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)xbtnClick:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 108;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 108)];
+    view.backgroundColor=[UIColor clearColor];
+    UIImageView *image =[UIImageView new];
+    UILabel *lab =[UILabel new];
+    NSString *str=self.img;
+    if ([[NSNull null] isEqual:str]) {
+        str=@"http://ec4.images-amazon.com/images/I/51jurMyudRL._SL500_AA300_.jpg";
+    }
+    [image sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"yushe"]];
+
+    lab.text=self.des;
+    lab.font=[UIFont systemFontOfSize:15];
+    lab.numberOfLines=0;
+    [view addSubview:image];
+    [view addSubview:lab];
+    
+    [image mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(8);
+        make.top.mas_equalTo(4);
+        make.size.mas_equalTo(CGSizeMake(75,100));
+    }];
+    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(image.mas_right).with.offset(3);
+        make.top.equalTo(image);
+        make.right.mas_equalTo(-8);
+        make.height.mas_lessThanOrEqualTo(100);
+    }];
+    
+    return view;
+}
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height) {

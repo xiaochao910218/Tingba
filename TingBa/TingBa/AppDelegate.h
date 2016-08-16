@@ -10,9 +10,21 @@
 #import "WXApi.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WeiboSDK.h"
+//@protocol QQShareDelegate <NSObject>
+//
+//-(void)shareSuccssWithQQCode:(NSInteger)code;
+//@end
+@protocol WeiBoDelegate <NSObject>
+
+//登录的代理
+-(void)weiboLoginByResponse:(WBBaseResponse *)response;
+@end
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (weak  , nonatomic) id<WeiBoDelegate> weiboDelegate;
+//@property (weak  , nonatomic) id<QQShareDelegate> qqDelegate;
 
 
 @end

@@ -32,7 +32,7 @@
     }else{
         self.rotatingView.frame = CGRectMake(0, 0, KScreenWidth *0.8, KScreenWidth*0.8);
     }
-    self.rotatingView.center = CGPointMake(KScreenWidth/2, height_i4/2 + topHeight);
+    self.rotatingView.center = CGPointMake(KScreenWidth/2, height_i4/2);
     [self.rotatingView setRotatingViewLayoutWithFrame:self.rotatingView.frame];
 }
 

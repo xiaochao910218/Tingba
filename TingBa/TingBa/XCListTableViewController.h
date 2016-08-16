@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSString *listchapter;
 @property (nonatomic,strong) NSString *listanchor;
 @property (nonatomic,strong) NSString *listplayCount;
+@property (nonatomic,strong) NSString *listDes;
 @property(nonatomic,strong) NSMutableArray *listArr;
 
 @end

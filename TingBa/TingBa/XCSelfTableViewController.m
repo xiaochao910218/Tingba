@@ -25,22 +25,32 @@
     UIImageView *image=[[UIImageView alloc]initWithFrame:self.view.frame];
     image.image=[UIImage imageNamed:@"screen.jpg"];
     self.tableView.backgroundView=image;
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.671 green:0.749 blue:0.176 alpha:0.6]];
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     switch (indexPath.row) {
-        case 5:
+//        case 1:
+//            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"loginvc"]]
+//                                                         animated:YES];
+//            [self.sideMenuViewController hideMenuViewController];
+//            
+//            break;
+
+        case 4:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"firstViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
-        case 7:
+        case 6:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"collectvc"]]
                                                          animated:YES];
-            [self.sideMenuViewController hideMenuViewController];
+             [self.sideMenuViewController hideMenuViewController];
+            
             break;
-        case 11:
+        case 10:
             [self clickClearMemory];
             break;
         default:
@@ -89,5 +99,14 @@
     [self presentViewController:alert animated:YES completion:nil];
     
 }
+
+- (IBAction)loginIn:(UIButton *)sender {
+    
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"loginvc"]]
+                                                 animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
+
+}
+
 
 @end

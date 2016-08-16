@@ -294,6 +294,7 @@ static int isHe=0;
         view.listImage=model.coverImage;
         view.listplayCount=model.playCount;
         view.listanchor=model.anchor;
+        view.listDes=model.coverview;
         NSMutableDictionary *pars=[NSMutableDictionary dictionary];
         NSString *name=model.name;
         if (name) {
